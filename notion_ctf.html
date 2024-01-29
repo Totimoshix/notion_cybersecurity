@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTF Widget</title>
+<style>
+  .widget-container {
+    border: 2px solid #000000;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #a0e3a0; /* Light green background */
+    width: 300px; /* or 100% to fill the width of the container */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Optional: adds shadow for depth */
+  }
+
+  .widget-header {
+    font-size: 24px;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+
+  .widget-content {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+  }
+
+  .widget-link {
+    color: #0000EE; /* Classic link blue */
+    text-decoration: none;
+    font-size: 18px;
+    border: 1px solid #0000EE; /* Blue border */
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .widget-link:hover {
+    background-color: #0000EE;
+    color: white;
+  }
+
+  /* Additional styles for input and labels can go here */
+</style>
+</head>
+<body>
+
+<div class="widget-container">
+  <div class="widget-header">CTF's Completed</div>
+  
+  <div class="widget-content">
+    <label for="completedCount">Number:</label>
+    <input type="text" id="completedCount" name="completedCount" value="5" disabled>
+  </div>
+  
+  <div class="widget-content">
+    <label for="upcomingName">Name:</label>
+    <input type="text" id="upcomingName" name="upcomingName" value="name" disabled>
+  </div>
+  
+  <a class="widget-link" href="LINK_TO_YOUR_NOTION_PAGE">Completed CTF Challenges</a>
+</div>
+
+</body>
+</html>
