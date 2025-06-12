@@ -25,4 +25,6 @@ all options.
 
 Passing `--install-missing` will clone and build the required utilities
 (`sslscan`, `testssl.sh`, and `shcheck`) in a local `tools/` directory if they
-are not already installed on your system.
+are not already installed on your system. The installation step relies on the
+`git` and `make` utilities being available.
+

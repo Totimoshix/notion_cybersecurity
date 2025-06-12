@@ -26,15 +26,20 @@ TOOLS: Dict[str, Dict[str, str]] = {
 import requests
 
 
-def run_command(cmd: List[str] | str) -> int:
-    """Run a command and stream its output."""
-    process = subprocess.Popen(
-        cmd,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.STDOUT,
-        text=True,
-        shell=isinstance(cmd, str),
-    )
+def run_command(cmd: List[str] | str, cwd: str | None = None) -> int:
+    """Run a command and stream its output. Return the exit code."""
+    try:
+        process = subprocess.Popen(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            text=True,
+            shell=isinstance(cmd, str),
+            cwd=cwd,
+        )
+    except FileNotFoundError as exc:
+        print(f"Command not found: {cmd.split()[0] if isinstance(cmd, str) else cmd[0]}")
+        return 1
     if process.stdout:
         for line in process.stdout:
             print(line, end="")
@@ -49,6 +54,9 @@ def install_tool(name: str, base_dir: str = "tools") -> bool:
         return False
     os.makedirs(base_dir, exist_ok=True)
     dest = os.path.join(base_dir, name)
+    if not shutil.which("git"):
+        print("git is required to install tools but was not found")
+        return False
     if not os.path.exists(dest):
         print(f"Cloning {name} from {info['repo']}")
         if run_command(["git", "clone", info["repo"], dest]) != 0:
@@ -57,7 +65,7 @@ def install_tool(name: str, base_dir: str = "tools") -> bool:
     build_cmd = info.get("build")
     if build_cmd:
         print(f"Building {name}")
-        if run_command(build_cmd) != 0:
+        if run_command(build_cmd, cwd=dest) != 0:
             print(f"Failed to build {name}")
             return False
     return True
