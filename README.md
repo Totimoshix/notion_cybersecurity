@@ -26,3 +26,15 @@ all options.
 Passing `--install-missing` will clone and build the required utilities
 (`sslscan`, `testssl.sh`, and `shcheck`) in a local `tools/` directory if they
 are not already installed on your system.
+
+## Active Directory Enumeration Script
+
+The `ad_enum.py` script automates common Active Directory reconnaissance tasks. It wraps popular utilities such as `nmap`, `enum4linux`, `smbclient`, `smbmap`, `ldapsearch`, `rpcclient`, `nmblookup`, `crackmapexec`, `bloodhound-python`, and `kerbrute`.
+
+Simply run the script and supply the target domain controller IP along with optional domain credentials and a user wordlist when prompted.
+
+```bash
+python ad_enum.py
+```
+
+Installed tools will execute and their results are summarized in a table. Any missing utilities are reported so you can install them.
